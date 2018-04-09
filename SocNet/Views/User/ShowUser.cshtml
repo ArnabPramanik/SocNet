@@ -1,0 +1,135 @@
+﻿@model ViewModels.ApplicationUserViewModel
+@using Models
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "ShowUser";
+}
+
+<h2>User</h2>
+
+@if (Model.ApplicationUser != null)
+{
+    @Model.ApplicationUser.UserName
+
+
+    if (!Model.ApplicationUser.UserName.Equals(User.Identity.GetUserName()) && User.Identity.IsAuthenticated)
+    {
+        if (!Model.IsFriends)
+        {
+            <a class="btn btn-danger" href="/User/AddFriend?userName=@Model.ApplicationUser.UserName">Add friend</a>
+        }
+        else
+        {
+            <a class="btn btn-danger" href="/User/DeleteFriend?userName=@Model.ApplicationUser.UserName">Delete friend</a>
+        }
+    }
+
+    <h1>Search</h1>
+    using (Html.BeginForm("RetrieveUser2", "User", FormMethod.Post))
+    {
+        @Html.TextBoxFor(model => model.Email)
+        @Html.ValidationMessageFor(model => model.Email)
+        <button type="submit">Search</button>
+    }
+    <h1>Friends</h1>
+
+    foreach (Friends friends in Model.FriendList)
+    {
+        if (friends.UserA.Equals(Model.ApplicationUser.UserName))
+        {
+            <a href="/User/RetrieveUser?userName=@friends.UserB">@friends.UserB</a>;
+            <br />
+        }
+        else
+        {
+            <a href="/User/RetrieveUser?userName=@friends.UserA">@friends.UserA</a>;
+            <br />
+        }
+    }
+
+    <h1>Posts</h1>
+    if (User.Identity.GetUserName().Equals(Model.ApplicationUser.UserName))
+    {
+
+        using (Html.BeginForm("SavePost", "User", FormMethod.Post))
+        {
+            @Html.HiddenFor(model => model.ApplicationUser.UserName)
+            @Html.HiddenFor(model => model.ApplicationUser.Id)
+
+            @Html.TextBoxFor(model => model.PostContent)
+
+            <button type="submit">Submit</button>
+        }
+        foreach (Post post in Model.ApplicationUser.Posts)
+        { <b>@post.UserNameOfSender</b> <text>:</text>
+        @post.PostContent;
+        <a class="btn btn-danger" href="/User/DeletePost/@post.Id">Delete</a>
+        <br />
+    }
+}
+else if (Model.IsFriends)
+{
+    using (Html.BeginForm("SavePost", "User", FormMethod.Post))
+    {
+        @Html.HiddenFor(model => model.ApplicationUser.UserName)
+        @Html.HiddenFor(model => model.ApplicationUser.Id)
+
+        @Html.TextBoxFor(model => model.PostContent)
+
+        <button type="submit">Submit</button>
+    }
+
+    foreach (Post post in Model.ApplicationUser.Posts)
+    {
+        <b>@post.UserNameOfSender</b> <text>:</text>
+        @post.PostContent;
+        
+        <br />
+    }
+}
+
+
+
+}
+
+
+
+@section scripts
+{
+    <script>
+
+
+        $(document).ready(function () {
+
+             $(".js-add-friend").on("click",
+                function () {
+                    @if(Model.ApplicationUser != null)
+{
+                        <text> $.ajax({
+        url: "/api/User/AddFriend?userName=@Model.ApplicationUser.UserName",
+                        method: "GET"
+                    });</text>
+                    }
+
+
+                })
+
+             $(".js-delete-friend").on("click",
+                function () {
+                    @if(Model.ApplicationUser != null)
+{
+                        <text> $.ajax({
+        url: "/api/User/DeleteFriend?userName=@Model.ApplicationUser.UserName",
+                        method: "GET"
+                    });</text>
+                    }
+
+
+                    })
+
+
+
+        });
+    </script>
+}

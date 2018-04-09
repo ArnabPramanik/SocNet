@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocNet", "SocNet\SocNet.csproj", "{40C0B476-6E5E-454F-A0CE-E8FC4CFD5F52}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{311AC529-EADC-482B-97B3-4EB8B3797FF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{40C0B476-6E5E-454F-A0CE-E8FC4CFD5F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40C0B476-6E5E-454F-A0CE-E8FC4CFD5F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40C0B476-6E5E-454F-A0CE-E8FC4CFD5F52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{311AC529-EADC-482B-97B3-4EB8B3797FF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{311AC529-EADC-482B-97B3-4EB8B3797FF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{311AC529-EADC-482B-97B3-4EB8B3797FF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{311AC529-EADC-482B-97B3-4EB8B3797FF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

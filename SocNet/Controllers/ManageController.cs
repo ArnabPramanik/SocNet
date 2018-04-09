@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using Models;
+using SocNet;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using SocNet.Models;
 
-namespace SocNet.Controllers
+namespace Controllers
 {
     [Authorize]
     public class ManageController : Controller
